@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 // FSM States for the enemy
-public enum EnemyState {ATTACK, CHASE, MOVING, DEFAULT };
+public enum EnemyState {ATTACK, CHASE, MOVING, DEAD, DEFAULT };
 
 
 [RequireComponent(typeof(NavMeshAgent))]
@@ -19,6 +19,7 @@ public class EnemyAI : MonoBehaviour
     protected EnemyState state = EnemyState.DEFAULT;
     protected Vector3 destination = new Vector3(0, 0, 0);
 
+    AudioSource myaudio;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +27,7 @@ public class EnemyAI : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         agent = this.GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        myaudio = GetComponent<AudioSource>();
     }
 
     private Vector3 RandomPosition()
@@ -85,9 +87,35 @@ public class EnemyAI : MonoBehaviour
                     animator.SetBool("isAttacking", false);
                 }
                 break;
+            case EnemyState.DEAD:
+                animator.SetBool("isDead", true);
+                gameObject.GetComponent<NavMeshAgent>().enabled = false;
+                break;
             default:
                 break;
 
         }
+    }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.CompareTag("Bullet"))
+        {
+            // Disable all Renderers and Colliders
+            //Renderer[] allRenderers = gameObject.GetComponentsInChildren<Renderer>();
+            //foreach (Renderer c in allRenderers) c.enabled = false;
+            Collider[] allColliders = gameObject.GetComponentsInChildren<Collider>();
+            foreach (Collider c in allColliders) c.enabled = false;
+
+            state = EnemyState.DEAD;
+            StartCoroutine(PlayAndDestroy(3.0f));
+        }
+    }
+
+    private IEnumerator PlayAndDestroy(float waitTime)
+    {
+        myaudio.Play();
+        yield return new WaitForSeconds(waitTime);
+        Destroy(gameObject);
     }
 }
