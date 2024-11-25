@@ -21,6 +21,11 @@ public class EnemyAI : MonoBehaviour
 
     AudioSource myaudio;
 
+    //Blood Splatter Effect
+    ParticleSystem bloodSplatterEffect;
+    bool effectStarted = false;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +33,7 @@ public class EnemyAI : MonoBehaviour
         agent = this.GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         myaudio = GetComponent<AudioSource>();
+        bloodSplatterEffect = transform.GetComponent<ParticleSystem>();
     }
 
     private Vector3 RandomPosition()
@@ -108,6 +114,8 @@ public class EnemyAI : MonoBehaviour
             foreach (Collider c in allColliders) c.enabled = false;
 
             state = EnemyState.DEAD;
+            gameObject.GetComponent<ParticleSystemRenderer>().enabled = true;
+            StartBloodSplatter();
             StartCoroutine(PlayAndDestroy(3.0f));
         }
     }
@@ -116,6 +124,22 @@ public class EnemyAI : MonoBehaviour
     {
         myaudio.Play();
         yield return new WaitForSeconds(waitTime);
+        StopBloodSplatter();
         Destroy(gameObject);
+    }
+
+    private void StartBloodSplatter()
+    {
+        if (effectStarted == false)
+        {
+            bloodSplatterEffect.Play();
+            effectStarted = true;
+        }
+
+    }
+    private void StopBloodSplatter()
+    {
+        effectStarted = false;
+        bloodSplatterEffect.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
     }
 }
