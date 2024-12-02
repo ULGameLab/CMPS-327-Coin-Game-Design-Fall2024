@@ -4,5 +4,15 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Start Screen.unity
+    guid: 75f0587135aab624e88d3c779efa1b4c
+  - enabled: 1
+    path: Assets/Scenes/CoinGame.unity
+    guid: 57390c9344005d44a8ee134bffdfe973
+  - enabled: 1
+    path: Assets/Scenes/GameEndScene.unity
+    guid: 9f0f87b518297d947bee51c207432f3a
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0

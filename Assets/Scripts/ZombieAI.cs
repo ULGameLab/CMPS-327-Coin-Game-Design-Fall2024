@@ -120,6 +120,7 @@ public class ZombieAI : MonoBehaviour
             StartBloodSplatter();
 
             StartCoroutine(PlayAndDestroy(3.0f));
+            GameStats.UpdateEnemyiesKilled();
         }
     }
 

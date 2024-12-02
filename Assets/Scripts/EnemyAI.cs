@@ -117,6 +117,7 @@ public class EnemyAI : MonoBehaviour
             gameObject.GetComponent<ParticleSystemRenderer>().enabled = true;
             StartBloodSplatter();
             StartCoroutine(PlayAndDestroy(3.0f));
+            GameStats.UpdateEnemyiesKilled();
         }
     }
 
