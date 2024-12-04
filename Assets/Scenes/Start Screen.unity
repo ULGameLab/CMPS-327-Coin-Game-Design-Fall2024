@@ -2093,6 +2093,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ffffd29eb301f409064ceb74efbdd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coinCountText: {fileID: 0}
+  diamondCountText: {fileID: 0}
+  enemyCountText: {fileID: 0}
+  gameScoreText: {fileID: 0}
 --- !u!4 &789847456
 Transform:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -52,6 +53,11 @@ public class Player : MonoBehaviour
     void Update()
     {
         SetHealthBarValue(health / 100);
+
+        if (health <= 0)
+        {
+            SceneManager.LoadScene("PlayerDeadScene");
+        }
     }
 
     void OnTriggerEnter(Collider other)

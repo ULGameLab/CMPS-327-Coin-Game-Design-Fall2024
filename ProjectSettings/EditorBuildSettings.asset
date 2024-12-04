@@ -14,5 +14,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameEndScene.unity
     guid: 9f0f87b518297d947bee51c207432f3a
+  - enabled: 1
+    path: Assets/Scenes/PlayerDeadScene.unity
+    guid: 7350782fd9685364d9f2c107ef103b6e
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

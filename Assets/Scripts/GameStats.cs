@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
-using static UnityEditor.Timeline.TimelinePlaybackControls;
+//using UnityEditor.Timeline.TimelinePlaybackControls;
 
 
 public class GameStats : MonoBehaviour
